@@ -1,22 +1,16 @@
 import React, { useState } from "react";
 import TodoItem from "./TodoItem";
+import InputArea from "./InputArea";
 
 function App() {
 
   const [todos, setTodos] = useState(["study", "work"]);
-  const [text, setText] = useState("");
 
-  function handleChange(event){
-    const {value} = event.target;
-    setText(value);
-  }
-
-  function buttonPressed(event){
+  function buttonPressed(text){
     event.preventDefault();
-    setTodos(prevTodos => [
-      ...prevTodos, text
-    ]);
-
+      setTodos(prevTodos => [
+        ...prevTodos, text
+      ]);
     setText("");
   }
   
@@ -33,12 +27,7 @@ function App() {
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <div className="form">
-        <input onChange={handleChange} type="text" />
-        <button onClick={buttonPressed}>
-          <span>Add</span>
-        </button>
-      </div>
+        <InputArea onAdd={buttonPressed}/>
       <div>
         <ul>
           {todos.map((todo, index) => (
